@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import { selectContacts } from 'redux/contacts/selectors';
+import { addContacts } from 'redux/contacts/operations';
 import css from './ContactForm.module.css';
 
 export const ContactForm = () => {
@@ -19,7 +19,7 @@ export const ContactForm = () => {
       number: number.value,
     };
 
-    if (contacts.some(contact => contact.name === name.value)) {
+    if (contacts.find(contact => contact.name === name.value)) {
       Report.warning(
         'Phonebook Warning',
         'The contact already exists with this name',
@@ -27,7 +27,7 @@ export const ContactForm = () => {
       );
       return;
     }
-    dispatch(addContact(contact));
+    dispatch(addContacts(contact));
     form.reset();
   };
 

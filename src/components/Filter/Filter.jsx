@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilters } from 'redux/contacts/filterSlice';
+import { selectFilter } from 'redux/contacts/selectors';
 import css from './Filter.module.css';
 
 export const Filter = () => {
@@ -7,7 +8,7 @@ export const Filter = () => {
 
   const inputFilter = event => {
     const value = event.target.value;
-    dispatch(setFilter(value.toLowerCase()));
+    dispatch(setFilters(value.toLowerCase()));
   };
   return (
     <label className={css.name}>
@@ -16,6 +17,7 @@ export const Filter = () => {
         className={css.input}
         type="text"
         name="filter"
+        value={useSelector(selectFilter)}
         onChange={inputFilter}
       />
     </label>
