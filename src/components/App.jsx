@@ -12,6 +12,10 @@ const Register = lazy(() => import('../pages/Register/Register'));
 const Login = lazy(() => import('../pages/Login/Login'));
 const Contacts = lazy(() => import('../pages/PhoneBook/PhoneBook'));
 
+const basename = '/goit-react-hw-08-phonebook';
+
+const getPath = path => `${basename}/${path}`;
+
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
@@ -24,10 +28,10 @@ export const App = () => {
     <b> Refreshing user...</b>
   ) : (
     <Routes>
-      <Route path="/goit-react-hw-08-phonebook/" element={<Layout />}>
+      <Route path={basename} element={<Layout />}>
         <Route index element={<Home />} />
         <Route
-          path="/goit-react-hw-08-phonebook/register"
+          path={getPath('register')}
           element={
             <RestrictedRoute
               redirectTo="/goit-react-hw-08-phonebook/phonebook"
@@ -36,19 +40,19 @@ export const App = () => {
           }
         />
         <Route
-          path="/goit-react-hw-08-phonebook/login"
+          path={getPath('login')}
           element={
             <RestrictedRoute
-              redirectTo="/goit-react-hw-08-phonebook/phonebook"
+              redirectTo={getPath('phonebook')}
               component={<Login />}
             />
           }
         />
         <Route
-          path="/goit-react-hw-08-phonebook/phonebook"
+          path={getPath('phonebook')}
           element={
             <PrivateRoute
-              redirectTo="/goit-react-hw-08-phonebook/login"
+              redirectTo={getPath('login')}
               component={<Contacts />}
             />
           }
