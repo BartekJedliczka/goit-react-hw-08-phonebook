@@ -23,7 +23,6 @@ export default function Contacts() {
         <Filter />
         <ContactList />
       </div>
-      <div className={css.blob}></div>
     </div>
   );
 }
